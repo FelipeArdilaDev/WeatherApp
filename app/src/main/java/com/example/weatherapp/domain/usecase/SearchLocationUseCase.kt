@@ -1,0 +1,10 @@
+package com.example.weatherapp.domain.usecase
+
+import com.example.weatherapp.domain.repository.WeatherRepository
+import javax.inject.Inject
+
+class SearchLocationUseCase @Inject constructor(
+    private val repository: WeatherRepository
+) {
+    suspend operator fun invoke(query: String) = repository.getSearchLocation(query)
+}

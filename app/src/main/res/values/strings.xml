@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+
+    <string name="metric_uv_label">UV</string>
+    <string name="metric_uv_value">%1$s (%2$s)</string>
+
+    <string name="metric_humidity_label">Humedad</string>
+    <string name="metric_humidity_value">%1$d %%</string>
+
+    <string name="metric_visibility_label">Visibilidad</string>
+    <string name="metric_visibility_value">%1$d km</string>
+
+    <string name="metric_gusts_label">Ráfagas</string>
+    <string name="metric_gusts_value">%1$d km/h</string>
+    <string name="lbl_celsius">%1$d°C</string>
+    <string name="card_title_sunrise">Sunrise</string>
+    <string name="card_title_luna">Luna</string>
+
+    <string name="luminosidad">Luminosidad</string>
+    <string name="salida_luna">Salida de la luna</string>
+    <string name="siguiente_luna_llena">Siguiente luna llena</string>
+    <string name="dias_format">%1$d días</string>
+    <string name="card_title_moonrise">Moonrise</string>
+    <string name="txt_card_weather_info_region">%1$s, %2$s</string>
 </resources>

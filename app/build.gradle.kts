@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -6,6 +8,13 @@ plugins {
     alias(libs.plugins.ksp)
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+}
+
+val localProps = Properties().apply {
+    val file = rootProject.file("gradle.properties")
+    if (file.exists()) {
+        load(file.inputStream())
+    }
 }
 
 android {
@@ -19,6 +28,17 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "WEATHER_API_KEY",
+            "\"${localProps.getProperty("WEATHER_API_KEY", "")}\""
+        )
+        buildConfigField(
+            "String",
+            "BASE_URL",
+            "\"${localProps.getProperty("BASE_URL", "https://api.weatherapi.com/v1/")}\""
+        )
     }
 
     buildTypes {
@@ -49,6 +69,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.material)
 
     //Splash
     implementation(libs.androidx.core.splashscreen)
@@ -63,11 +84,27 @@ dependencies {
     //Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.compose.material.icons.extended)
 
     //Dagger
     implementation(libs.hilt.android)
     implementation(libs.play.services.location)
+    implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui.unit)
     ksp(libs.hilt.android.compiler)
+
+
+    // Mocking (soporta coEvery/coVerify)
+    testImplementation(libs.mockk)
+
+    // Coroutines test (runTest, StandardTestDispatcher)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    // (Opcional pero recomendado) assertions más cómodas
+    testImplementation(libs.truth)
 
     // Retrofit
     implementation(libs.retrofit)
@@ -83,11 +120,15 @@ dependencies {
     implementation(libs.glide)
     ksp(libs.compiler)
 
+    implementation(libs.coil.compose)
+
     //DataStore
     implementation(libs.androidx.datastore.preferences)
 
     //chart
     implementation(libs.mpandroidchart)
+
+    testImplementation(libs.turbine)
 
 
     implementation(libs.androidx.core.ktx)
