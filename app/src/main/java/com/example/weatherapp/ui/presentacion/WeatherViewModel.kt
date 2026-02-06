@@ -2,6 +2,7 @@ package com.example.weatherapp.ui.presentacion
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.weatherapp.core.extensions.toUiMessage
 import com.example.weatherapp.data.di.qualifers.IoDispatcher
 import com.example.weatherapp.data.location.LocationProvider
 import com.example.weatherapp.domain.models.entity.SearchResponseEntity
@@ -9,7 +10,6 @@ import com.example.weatherapp.domain.result.AppError
 import com.example.weatherapp.domain.result.AppResult
 import com.example.weatherapp.domain.usecase.GetForecastUseCase
 import com.example.weatherapp.domain.usecase.SearchLocationUseCase
-import com.example.weatherapp.extensions.toUiMessage
 import com.example.weatherapp.ui.presentacion.model.DeviceLocation
 import com.example.weatherapp.ui.presentacion.state.WeatherEffect
 import com.example.weatherapp.ui.presentacion.state.WeatherEvent
@@ -89,7 +89,7 @@ class WeatherViewModel @Inject constructor(
                         isSearching = false,
                         isForecastLoading = true,
                         errorMessage = null,
-                        displayLocation = null // ✅ cuando el usuario selecciona manual, ya no usamos el del device
+                        displayLocation = null
                     )
                 }
                 loadForecast(query = e.name)
@@ -195,12 +195,9 @@ class WeatherViewModel @Inject constructor(
                 _effect.emit(WeatherEffect.ShowSnackbar("No se pudo obtener ubicación"))
                 return@launch
             }
-
-            // ✅ Guardamos el nombre humano (Floridablanca / Santander)
             val placeName = loc.locality ?: loc.adminArea
             _state.update { it.copy(displayLocation = placeName) }
 
-            // ✅ Forecast por coordenadas (más exacto)
             val query = "${loc.latitude},${loc.longitude}"
             loadForecast(query)
         }

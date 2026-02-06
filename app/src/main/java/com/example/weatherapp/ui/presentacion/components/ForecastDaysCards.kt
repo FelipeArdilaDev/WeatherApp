@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.components
+package com.example.weatherapp.ui.presentacion.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

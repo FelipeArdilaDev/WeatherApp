@@ -36,6 +36,7 @@ truth = "1.4.2"
 turbine = "1.1.0"
 uiUnit = "1.10.2"
 material = "1.12.0"
+animation = "1.10.2"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
@@ -84,6 +85,7 @@ androidx-compose-ui-unit = { group = "androidx.compose.ui", name = "ui-unit", ve
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+androidx-compose-animation = { group = "androidx.compose.animation", name = "animation", version.ref = "animation" }
 
 
 

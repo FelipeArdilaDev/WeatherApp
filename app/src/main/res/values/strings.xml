@@ -22,4 +22,11 @@
     <string name="dias_format">%1$d días</string>
     <string name="card_title_moonrise">Moonrise</string>
     <string name="txt_card_weather_info_region">%1$s, %2$s</string>
+    <string name="lbl_ubication">Usar mi ubicación</string>
+    <string name="lbl_auto_detect">Detectar automáticamente</string>
+    <string name="lbl_search">Escribe al menos 3 letras para buscar.</string>
+    <string name="lbl_failed_search">No encontramos resultados.</string>
+    <string name="lbl_hour_item">%1$d°</string>
+    <string name="lbl_hour_km">%1$d km/h</string>
+    <string name="lbl_ilumination_value">%1$d%</string>
 </resources>

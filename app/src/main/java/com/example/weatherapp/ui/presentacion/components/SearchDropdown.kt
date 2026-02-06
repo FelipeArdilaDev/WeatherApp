@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.components
+package com.example.weatherapp.ui.presentacion.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -39,7 +39,6 @@ fun SearchDropdown(
     onSelect: (SearchResponseEntity) -> Unit
 ) {
     val show = query.trim().length >= 2 && results.isNotEmpty()
-
     AnimatedVisibility(visible = show) {
         Card(
             shape = RoundedCornerShape(18.dp),
@@ -61,15 +60,6 @@ fun SearchDropdown(
                             .padding(horizontal = 12.dp, vertical = 10.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        // iconito circular tipo screenshot
-                        Box(
-                            modifier = Modifier
-                                .size(30.dp)
-                                .clip(RoundedCornerShape(15.dp))
-                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.18f)),
-                            contentAlignment = Alignment.Center
-                        ) { Text("☁️") }
-
                         Spacer(Modifier.width(10.dp))
 
                         Column(Modifier.weight(1f)) {

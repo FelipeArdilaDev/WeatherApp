@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.components
+package com.example.weatherapp.ui.presentacion.components
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -45,8 +45,6 @@ fun CardHourlyForecast(model: RootForecastResponseEntity) {
         ) {
             val itemWidth = 84.dp
             val chartHeight = 128.dp
-
-            // ancho total (para que el canvas y el row se alineen)
             val totalWidth = itemWidth * next12.size
 
             Box(
@@ -54,7 +52,6 @@ fun CardHourlyForecast(model: RootForecastResponseEntity) {
                     .horizontalScroll(scroll)
                     .padding(horizontal = 10.dp, vertical = 12.dp)
             ) {
-                // Canvas + columnas alineadas
                 Box(
                     modifier = Modifier
                         .width(totalWidth)

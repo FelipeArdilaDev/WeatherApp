@@ -63,14 +63,6 @@ android {
 }
 
 dependencies {
-
-    //Compose
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.material)
-
     //Splash
     implementation(libs.androidx.core.splashscreen)
     // Fragment
@@ -86,14 +78,24 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
+
+    //Material icons
     implementation(libs.androidx.compose.material.icons.extended)
 
     //Dagger
     implementation(libs.hilt.android)
     implementation(libs.play.services.location)
+
+    //Compose
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.material)
     implementation(libs.androidx.compose.foundation.layout)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.ui.unit)
+    implementation(libs.androidx.compose.animation)
     ksp(libs.hilt.android.compiler)
 
 
@@ -111,15 +113,10 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
-
     //Gson
     implementation(libs.gson)
 
-    // Glide
-    implementation(libs.glide.transformations)
-    implementation(libs.glide)
-    ksp(libs.compiler)
-
+    //Coil
     implementation(libs.coil.compose)
 
     //DataStore
@@ -129,8 +126,6 @@ dependencies {
     implementation(libs.mpandroidchart)
 
     testImplementation(libs.turbine)
-
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.components
+package com.example.weatherapp.ui.presentacion.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,7 +19,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.weatherapp.R
 
 @Composable
 fun SearchPill(
@@ -47,7 +49,7 @@ fun SearchPill(
                 value = query,
                 onValueChange = onQueryChange,
                 modifier = Modifier.weight(1f),
-                placeholder = { Text("Buscar ubicación") },
+                placeholder = { Text(stringResource(R.string.lbl_search)) },
                 singleLine = true,
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,

@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.components
+package com.example.weatherapp.ui.presentacion.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.material3.MaterialTheme
@@ -28,8 +28,6 @@ fun HourlyLineChartCanvas(
         if (temps.isEmpty()) return@Canvas
 
         val height = size.height
-
-        // Márgenes verticales para dejar espacio a labels/íconos
         val topPad = 14.dp.toPx()
         val bottomPad = 44.dp.toPx()
 
@@ -37,11 +35,9 @@ fun HourlyLineChartCanvas(
         val maxT = temps.maxOrNull() ?: 0f
         val range = max(1f, maxT - minT)
 
-        // X por columna (centro de cada item)
         val itemPx = itemWidth.toPx()
         fun xAt(i: Int) = (itemPx * i) + itemPx / 2f
 
-        // Y mapeado (más caliente = más arriba)
         fun yAt(t: Float): Float {
             val norm = (t - minT) / range
             return (height - bottomPad) - norm * (height - topPad - bottomPad)
@@ -60,7 +56,7 @@ fun HourlyLineChartCanvas(
             )
         }
 
-        // Línea (path) + puntos
+        // Línea + puntos
         val path = Path()
         temps.forEachIndexed { i, t ->
             val x = xAt(i)
@@ -78,7 +74,7 @@ fun HourlyLineChartCanvas(
             val x = xAt(i)
             val y = yAt(t)
 
-            // círculo blanco de fondo (como en el mock)
+            // círculo blanco de fondo
             drawCircle(
                 color = Color.White,
                 radius = 9f,

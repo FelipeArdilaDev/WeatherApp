@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.components
+package com.example.weatherapp.ui.presentacion.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
@@ -52,12 +51,10 @@ fun MoonCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                // LEFT
                 Column(
                     modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    // Header
                     Text(
                         text = title.uppercase(),
                         style = MaterialTheme.typography.labelSmall,
@@ -77,7 +74,6 @@ fun MoonCard(
 
                 Spacer(Modifier.width(14.dp))
 
-                // RIGHT - Imagen (ideal: dibujito según fase)
                 MoonImage(
                     modifier = Modifier.size(92.dp),
                     fallbackIcon = Icons.Outlined.DarkMode

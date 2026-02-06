@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.components
+package com.example.weatherapp.ui.presentacion.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,9 +10,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.example.weatherapp.R
 
 @Composable
 fun HourColumn(
@@ -26,9 +28,8 @@ fun HourColumn(
         modifier = modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // temp arriba (como el mock)
         Text(
-            text = "${tempC}°",
+            text = stringResource(R.string.lbl_hour_item, tempC),
             style = MaterialTheme.typography.labelLarge,
             fontWeight = FontWeight.SemiBold,
             color = MaterialTheme.colorScheme.onSurface
@@ -45,7 +46,7 @@ fun HourColumn(
         Spacer(Modifier.height(6.dp))
 
         Text(
-            text = "${windKph} km/h",
+            text = stringResource(R.string.lbl_hour_km, windKph),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )

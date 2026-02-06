@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.presentacion.search_screen
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,20 +18,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.example.weatherapp.ui.components.CardHourlyForecast
-import com.example.weatherapp.ui.components.CardMetrics
-import com.example.weatherapp.ui.components.CardWeatherInfo
-import com.example.weatherapp.ui.components.CardsSunMoonRow
-import com.example.weatherapp.ui.components.EmptyState
-import com.example.weatherapp.ui.components.ForecastDaysCards
-import com.example.weatherapp.ui.components.InlineErrorCard
-import com.example.weatherapp.ui.components.SearchDropdown
-import com.example.weatherapp.ui.components.SearchPill
+import com.example.weatherapp.ui.presentacion.components.CardHourlyForecast
+import com.example.weatherapp.ui.presentacion.components.CardMetrics
+import com.example.weatherapp.ui.presentacion.components.CardWeatherInfo
+import com.example.weatherapp.ui.presentacion.components.CardsSunMoonRow
+import com.example.weatherapp.ui.presentacion.components.ForecastDaysCards
+import com.example.weatherapp.ui.presentacion.components.InlineErrorCard
+import com.example.weatherapp.ui.presentacion.components.SearchDropdown
+import com.example.weatherapp.ui.presentacion.components.SearchPill
 import com.example.weatherapp.ui.presentacion.state.WeatherState
 
 @Composable
@@ -44,38 +45,33 @@ fun WeatherScreen(
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
-    ) { padding ->
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+        topBar = {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(horizontal = 14.dp, vertical = 12.dp)
+            ) {
+                SearchPill(
+                    query = state.query,
+                    onQueryChange = onQueryChange
+                )
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .background(MaterialTheme.colorScheme.background)
-                .padding(14.dp)
-        ) {
-
-            Column(Modifier.fillMaxSize()) {
-
-                Box {
-                    Column {
-                        SearchPill(
-                            query = state.query,
-                            onQueryChange = onQueryChange
-                        )
-
-                        if (state.isSearching) {
-                            Spacer(Modifier.height(6.dp))
-                            LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-                        }
-                    }
-
-                    if (state.showDropdown) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 56.dp + 10.dp)
-                                .zIndex(2f)
+                if (state.isSearching) {
+                    Spacer(Modifier.height(6.dp))
+                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+                }
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    AnimatedVisibility(
+                        visible = state.showDropdown,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .zIndex(2f)
+                    ) {
+                        Surface(
+                            tonalElevation = 6.dp,
+                            shape = MaterialTheme.shapes.medium
                         ) {
                             SearchDropdown(
                                 query = state.query,
@@ -85,33 +81,38 @@ fun WeatherScreen(
                         }
                     }
                 }
+            }
+        }
+    ) { padding ->
 
-                Spacer(Modifier.height(10.dp))
-
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.spacedBy(10.dp),
-                    contentPadding = PaddingValues(bottom = 16.dp)
-                ) {
-                    val forecast = state.forecast
-                    if (forecast != null) {
-                        item {
-                            val title = state.displayLocation ?: forecast.location.name
-                            CardWeatherInfo(forecast, title = title)
-                        }
-                        item { ForecastDaysCards(forecast) }
-                        item { CardHourlyForecast(forecast) }
-                        item { CardMetrics(forecast) }
-                        item { CardsSunMoonRow(forecast) }
-                    } else {
-                        item { EmptyState() }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .background(MaterialTheme.colorScheme.background)
+                .padding(horizontal = 14.dp)
+        ) {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                contentPadding = PaddingValues(bottom = 16.dp, top = 12.dp)
+            ) {
+                state.forecast?.let { forecast ->
+                    item {
+                        val title = state.displayLocation ?: forecast.location.name
+                        CardWeatherInfo(forecast, title = title)
                     }
+                    item { ForecastDaysCards(forecast) }
+                    item { CardHourlyForecast(forecast) }
+                    item { CardMetrics(forecast) }
+                    item { CardsSunMoonRow(forecast) }
+                }
 
-                    state.errorMessage?.let { msg ->
-                        item { InlineErrorCard(message = msg, onRetry = onRetry) }
-                    }
+                state.errorMessage?.let { msg ->
+                    item { InlineErrorCard(message = msg, onRetry = onRetry) }
                 }
             }
+
             if (state.isForecastLoading) {
                 Box(
                     modifier = Modifier

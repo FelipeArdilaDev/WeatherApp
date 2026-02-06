@@ -1,4 +1,4 @@
-package com.example.weatherapp.extensions
+package com.example.weatherapp.core.extensions
 
 import com.example.weatherapp.domain.result.AppError
 
